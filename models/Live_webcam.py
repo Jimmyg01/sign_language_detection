@@ -5,7 +5,7 @@ from train_model import SignLanguageModel  # Import the model from train_model.p
 import numpy as np
 from PIL import Image
 
-# Load your trained model
+# Load the trained model
 model = SignLanguageModel()
 model.load_state_dict(torch.load('sign_language_model.pth'))
 model.eval()  # Set the model to evaluation mode
@@ -18,6 +18,7 @@ transform = transforms.Compose([
     transforms.ToTensor(),
 ])
 
+# Make numerical predcition for the live screen
 def predict(image):
     # Preprocess the image
     image_tensor = transform(image).unsqueeze(0)  # Add batch dimension
@@ -53,6 +54,7 @@ while True:
     # Display the frame
     cv2.imshow('Sign Language Detection', frame)
 
+    #press q to exit webcam
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
