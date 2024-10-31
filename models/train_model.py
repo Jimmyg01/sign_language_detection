@@ -36,20 +36,20 @@ class SignLanguageDataset(torch.utils.data.Dataset):
 class SignLanguageModel(nn.Module):
     def __init__(self):
         super(SignLanguageModel, self).__init__()
-        self.conv1 = nn.Conv2d(1, 32, kernel_size=3, stride=1, padding=1)  # 128x128 -> 128x128
+        self.conv1 = nn.Conv2d(1, 32, kernel_size=3, stride=1, padding=1)  # 128x128 -> 128x128 (same size)
         self.bn1 = nn.BatchNorm2d(32)
-        self.pool = nn.MaxPool2d(kernel_size=2, stride=2, padding=0)        # 128x128 -> 64x64
-        self.conv2 = nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=1) # 64x64 -> 64x64
+        self.pool = nn.MaxPool2d(kernel_size=2, stride=2, padding=0)        # 128x128 -> 64x64 (reduction in size)
+        self.conv2 = nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=1) # 64x64 -> 64x64 (same size)
         self.bn2 = nn.BatchNorm2d(64)
         self.dropout = nn.Dropout(0.5)
 
-        # Using a dummy input to calculate the flattened size dynamically
+        # Using a dummy input to find the flattened size 
         dummy_input = torch.zeros(1, 1, 128, 128)  # Assuming your images are 128x128
         self.flattened_size = self._get_flattened_size(dummy_input)
 
         # Now set up the fully connected layers
-        self.fc1 = nn.Linear(self.flattened_size, 64)
-        self.fc2 = nn.Linear(64, 10)  # Assuming you have 10 classes
+        self.fc1 = nn.Linear(self.flattened_size, 64) #
+        self.fc2 = nn.Linear(64, 10)  # Assuming you have 10 per classes
 
     def _get_flattened_size(self, x):
         x = self.conv1(x)    # Conv1: 128x128 -> 128x128
@@ -118,9 +118,10 @@ model = SignLanguageModel()
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.0001)
 
-# Training parameters
+# Define training parameters
 num_epochs = 7  # Adjust based on your requirements
 
+Run through the epochs
 for epoch in range(num_epochs):
     running_loss = 0.0
     for images, labels in train_loader:
