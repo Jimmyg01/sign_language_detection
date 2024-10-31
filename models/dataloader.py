@@ -10,15 +10,15 @@ class SignLanguageDataset(Dataset):
         self.images = []
         self.labels = []
 
-        # Loop through each class folder
+        # Loop through each numbered folder
         for label in os.listdir(dataset_path):
             folder_path = os.path.join(dataset_path, label)
             if os.path.isdir(folder_path):
                 for img_file in os.listdir(folder_path):
                     img_path = os.path.join(folder_path, img_file)
-                    if img_file.endswith('.png') or img_file.endswith('.jpg'):  # Adjust based on your image formats
+                    if img_file.endswith('.png') or img_file.endswith('.jpg'):  # Adjust based on the image formats
                         self.images.append(img_path)
-                        self.labels.append(int(label))  # Assuming folder names are numeric labels
+                        self.labels.append(int(label))
 
         self.transform = transform
 
@@ -35,7 +35,7 @@ class SignLanguageDataset(Dataset):
         return image, label
 
 
-# Define the data augmentation transformations
+# Define the data augmentation transformations used to vary the input data
 data_transforms = transforms.Compose([
     transforms.Resize((128, 128)),  # Resize images to 256x256
     transforms.RandomHorizontalFlip(),  # Randomly flip images horizontally
