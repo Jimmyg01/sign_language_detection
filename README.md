@@ -1,4 +1,4 @@
-#Real-Time Sign Language Detection: Numbers 0-9
+Real-Time Sign Language Detection: Numbers 0-9
 This project implements a machine learning (CNN) model that translates hand gestures for numbers 0-9 into sign language in real time, with an associated confidence score. 
 I built it using a Convolutional Neural Network (CNN) in PyTorch, the model processes live video input from the webcam and classifies the gestures with over 90% validation accuracy.
 
