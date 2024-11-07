@@ -10,7 +10,7 @@ model = SignLanguageModel()
 model.load_state_dict(torch.load('sign_language_model.pth'))
 model.eval()  # Set the model to evaluation mode
 
-# Define the transform to resize and normalize the input
+# Define the transform to resize and normalise the input
 transform = transforms.Compose([
     transforms.ToPILImage(),  # Convert numpy array to PIL Image
     transforms.Resize((128, 128)),
