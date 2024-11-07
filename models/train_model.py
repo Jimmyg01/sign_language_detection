@@ -81,7 +81,7 @@ class SignLanguageModel(nn.Module):
 # Set the path to your dataset
 dataset_path = r'C:\\Users\\jimmy\\OneDrive\\Desktop\\sign_language_detection\\Data'
 
-# Initialize lists to hold image paths and labels
+# Create lists to hold image paths and labels
 all_images = []
 all_labels = []
 
@@ -113,7 +113,7 @@ val_dataset = SignLanguageDataset(images=val_images, labels=val_labels, transfor
 train_loader = DataLoader(train_dataset, batch_size=10, shuffle=True)
 val_loader = DataLoader(val_dataset, batch_size=10, shuffle=False)
 
-# Initialize the model, loss function, and optimizer
+# Start the model, loss function, and optimiser
 model = SignLanguageModel()
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.0001)
